@@ -1,0 +1,13 @@
+main > .container{
+    padding: 30x 0;
+}
+.circle {
+    width: 40px; /* Ancho del círculo */
+    height: 40px; /* Alto del círculo */
+    border-radius: 50%; /* Hace que el elemento sea redondo */
+    /* border: 1px solid #171717; Grosor y color del borde */
+    display: inline-block; /* Alineación en línea */
+    margin-left: 5px;
+}
+
+

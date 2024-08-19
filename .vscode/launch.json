@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        
+        {
+            "type": "chrome",
+            "name": "http://C:\\xampp\\php\\ext\\php_xdebug-3.3.2-8.2-vs16-x86_64.dll",
+            "request": "launch",
+            "url": "http://C:\\xampp\\php\\ext\\php_xdebug-3.3.2-8.2-vs16-x86_64.dll"
+        }
+    ]
+}
