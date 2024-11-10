@@ -53,8 +53,13 @@
 
             try {
                 $con->beginTransaction();
+                
+                $stmt = $con->prepare("SELECT id FROM rol WHERE nombre='Cliente'");
+                $stmt->execute();
+                $rol = $stmt->fetch(PDO::FETCH_ASSOC);
+                
                 $stmt1 = $con->prepare("INSERT INTO cuenta (correo,password,rolId) VALUES (?,?,?)");
-                $stmt1->execute([$cor, $pas,2]);
+                $stmt1->execute([$cor, $pas,$rol['id']]);
                 $persona_id= $con->lastInsertId(); // Obtener el ID del usuario insertado
 
                 $stmt2 = $con->prepare("INSERT INTO persona (cedula, nombre,telefono,cuentaid) VALUES (?,?,?,?)");
@@ -64,7 +69,7 @@
                 $ban = true;
             } catch (Exception $e) {
                 // Revertir la transacción si ocurre un error
-                $conn->rollback();
+                $con->rollback();
                 echo "Error: " . $e->getMessage();
             }
         }

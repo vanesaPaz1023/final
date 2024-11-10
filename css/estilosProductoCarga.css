@@ -1,0 +1,24 @@
+.color-list {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los círculos se muestren en varias líneas */
+    gap: 10px; /* Espacio entre los círculos */
+}
+
+.color-circle {
+    width: 50px;   /* Ajusta el tamaño del círculo */
+    height: 50px;  /* Ajusta el tamaño del círculo */
+    border-radius: 50%; /* Hace que el div sea un círculo */
+    display: flex; /* Flex para centrar el texto */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    color: #fff; /* Color del texto */
+    font-size: 10px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el círculo */
+    transition: transform 0.2s; /* Transición suave al pasar el ratón */
+}
+
+.color-circle:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del círculo al pasar el ratón */
+}
+
+

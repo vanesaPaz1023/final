@@ -1,17 +1,6 @@
-function verificarArchivo(id) {
-  fetch(`../img/productos/${id}`, { method: 'HEAD' })
-    .then(response => {
-      if (response.ok) {
-        console.log('El archivo existe.');
-      } else {
-        console.log('El archivo no existe.');
-      }
-    })
-    .catch(error => {
-      console.error('Error al verificar el archivo:', error);
-     
-    });
-}
+
+
+
 function mostrarColores(id) {
   let selectTalla = document.getElementById("talla");
     let idT = selectTalla.value;
@@ -37,75 +26,84 @@ function mostrarColores(id) {
           let htmlContent = ""; // Variable para acumular el HTML
           data.res.forEach(element => {
               let colorRGB = `rgb(${element.r}, ${element.g}, ${element.b})`;
-              // htmlContent += `<span class="circle" style="background-color: ${colorRGB};"></span>`;
               htmlContent += ` <button type="button" class="btn circle" style="background-color: ${colorRGB};"></button>`;
           });
           divColor.innerHTML = htmlContent; // Asigna el HTML generado al div        
         }
       }); 
 }
-
 function mostrarResultados(resultados) {
-    const productoHtml = document.getElementById('conte-productos');
-    productoHtml.innerHTML = ''; 
+  const productoHtml = document.getElementById('conte-productos');
+  productoHtml.innerHTML = ''; 
+  let contenidoHtml = ''; // Variable para acumular el contenido HTML
 
-    resultados.forEach(element => {  
-        let id = element.id;
-        let nombre = element.nombre;
-        let categoria = element.categoria;
-        let precio = parseFloat(element.precio).toFixed(2); // Formatear precio
+  resultados.forEach(element => {  
+      let id = element.id;
+      let nombre = element.nombre;
+      let categoria = element.categoria;
+      let precio = parseFloat(element.precio).toFixed(2); // Formatear precio
 
-        productoHtml.innerHTML += `
-            <div class="col">
-                <div class="card">
-                    <img src='img/productos/${id}.jpeg' class="d-block w-100" style="height:18rem;" id="img-cart"> 
-                    <div class="card-body">
-                        <h4 class="card-title">${nombre}</h4>
-                        <h5 class="card-title">${categoria}</h5>
-                        <p class="card-text">${precio}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="detalle.php?id=${id}" class="btn btn-outline-info">Detalles</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-            
-    });
-    verificarArchivo(id);
+      // Acumulamos el HTML
+      contenidoHtml += `
+          <div class="col">
+              <div class="card">
+                  <img src='img/productos/${id}.jpeg' class="d-block w-100" style="height:18rem;" 
+                       onerror="this.onerror=null; this.src='img/productos/no-img.png';"> 
+                  <div class="card-body">
+                      <h4 class="card-title">${nombre}</h4>
+                      <h5 class="card-title">${categoria}</h5>
+                      <p class="card-text">$${precio}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                              <a href="detalle.php?id=${id}" class="btn btn-outline-info">Comprar</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>`;
+  });
 
+  // Asignamos el contenido HTML a la página
+  productoHtml.innerHTML = contenidoHtml;
 }
-function FiltroPorCategoria(){
-  
-}
+
+
 document.addEventListener("DOMContentLoaded", function () {
   let inputBusqueda = document.getElementById("Search");
-  inputBusqueda.addEventListener("keyup", function (event) {
-    let url = "proceso/filtro.php"; // URL al endpoint PHP
-    let formData = new FormData();
-    formData.append("valor", event.target.value);
+  let timeoutId;
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.ok) {
-            mostrarResultados(data.resul);
-        } else {
-          console.error(
-            "No se encontraron resultados o hubo un error en la solicitud."
-          );
-        }
+  inputBusqueda.addEventListener("keyup", function (event) {
+    // Limpiar cualquier timeout anterior
+    clearTimeout(timeoutId);
+
+    // Esperar 300ms antes de ejecutar la búsqueda (debounce)
+    timeoutId = setTimeout(function () {
+      let url = "proceso/filtro.php"; // URL al endpoint PHP
+      let formData = new FormData();
+      formData.append("valor", event.target.value);
+
+      fetch(url, {
+        method: "POST",
+        body: formData,
+        mode: "cors",
       })
-      .catch((error) => {
-        console.error("Error en la solicitud:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            mostrarResultados(data.resul); // Mostrar resultados si la búsqueda es exitosa
+          } else {
+            console.error(
+              "No se encontraron resultados o hubo un error en la solicitud."
+            );
+          }
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud:", error);
+        });
+    }, 300); // Retraso de 300 ms antes de realizar la solicitud
   });
 });
+
 
 
 let eliminarItem = document.getElementById("eliminarModal");

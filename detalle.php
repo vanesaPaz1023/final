@@ -61,47 +61,50 @@ else{
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tienda final</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
+
 <body>
     <header data-bs-theme="dark">
         <div class="navbar navbar-expand-lg navbar-dark bg-info">
             <div class="container">
-            <a href="index.php" class="navbar-brand">
-                    <strong>Trabajo final</strong>
+                <a href="HomeCliente.php" class="navbar-brand">
+                    <strong>SIGMA</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarHeader">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link active">Catalogo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contacto</a>
-                        </li> -->
-                    </ul>
-                    <a href="GestionCarrito.php" class="btn btn-info"><i class="bi bi-cart4 text-white"></i> 
-                        <span id="num_cart" class="badge bg-danger"><?php if ( $sessionActual->getNumCart() != 0 )echo $sessionActual->getNumCart() ; else echo ''; ?></span>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <a href="GestionCarrito.php" class="btn btn-info"><i class="bi bi-cart4 text-white"></i>
+                        <span id="num_cart"
+                            class="badge bg-danger"><?php if ( $sessionActual->getNumCart() != 0 )echo $sessionActual->getNumCart() ; else echo ''; ?></span>
                     </a>
                     <li class="nav-item dropdown d-flex">
-                        <a class="nav-link dropdown-toggle text-center text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-center text-light" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $sessionActual->getUsuario()['correo'] ?>
                         </a>
-                        <ul class="dropdown-menu text-center bg-primary">
-                            <img src="img/Perfil.png"alt="">
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "Tipo: ". $sessionActual->getUsuario()['rol'] ?></a></li>
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "Cedula: ". $sessionActual->getUsuario()['cedula'] ?></a></li>
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "nombre: ". $sessionActual->getUsuario()['nombre'] ?></a></li>
-                            <li><a class="dropdown-item text-center" href="config/cerrarSesion.php">Cerrar Sesion</a></li>
+                        <ul class="dropdown-menu text-center bg-info">
+                            <img src="img/Perfil.png" alt="">
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "Tipo: ". $sessionActual->getUsuario()['rol'] ?></a></li>
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "Cedula: ". $sessionActual->getUsuario()['cedula'] ?></a></li>
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "nombre: ". $sessionActual->getUsuario()['nombre'] ?></a></li>
+                            <li><a class="dropdown-item text-center" href="config/cerrarSesion.php"><img
+                                        src="img/candado.png" alt="">Cerrar Sesion</a></li>
                         </ul>
                     </li>
                 </div>
@@ -113,7 +116,7 @@ else{
         <div class="container">
             <div class="row p-5">
                 <div class="col-md-6 order-md-1">
-                <img src="<?php echo $img; ?>"> 
+                    <img src="<?php echo $img; ?>">
                 </div>
                 <div class="col-md-6 order-md-2">
                     <h2><?php echo $nombre; ?></h2>
@@ -122,16 +125,17 @@ else{
                         <?php echo "Precio ". $descripcion; ?>
                     </p>
                     <div class="form-group">
-                        <label for="talla">Selecciona la Talla</label>
-                        <select class="form-control" id="talla" name="talla" onchange="mostrarColores(<?php echo $id; ?>)">
-                            <option value="0" selected disabled hidden>Seleccionar </option>
-                            <?php foreach($res2 as $row) {?>
+                        <labe l for="talla">Selecciona los dias accesibles</label>
+                            <select class="form-control" id="talla" name="talla"
+                                onchange="mostrarColores(<?php echo $id; ?>)">
+                                <option value="0" selected disabled hidden>Seleccionar dia </option>
+                                <?php foreach($res2 as $row) {?>
                                 <option value=' <?php echo $row["id"] ?>'> <?php echo $row["nombre"] ?></option>
-                            <?php }?>
-                        </select>
-                    </div>
+                                <?php }?>
+                            </select>
+                    </div>   
                     <div class="form-group p-4" id="color">
-                        
+
                     </div>
 
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -140,15 +144,16 @@ else{
                     </div>
 
                     <div class="d-grid gap-3 col-5 mx-auto">
-                        <button class="btn btn-outline-info" type="button" onclick="addItemProducto(<?php echo $id; ?>)">Agregar al carrito ya</button>
+                        <button class="btn btn-outline-info" type="button"
+                            onclick="addItemProducto(<?php echo $id; ?>)">Agregar al carrito ya</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/Controlador.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="js/Controlador.js"></script>
 </body>
-
-

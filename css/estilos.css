@@ -1,6 +1,4 @@
-main > .container{
-    padding: 30x 0;
-}
+
 .circle {
     width: 40px; /* Ancho del círculo */
     height: 40px; /* Alto del círculo */
@@ -9,5 +7,19 @@ main > .container{
     display: inline-block; /* Alineación en línea */
     margin-left: 5px;
 }
+.img-inicio{
+    width: 50%;
+}
+
+.logo{
+    width: 50px;
+    border-radius: 50%; /* Hace que el div sea un círculo */
+}
+.bg-personalizado {
+    background: linear-gradient(to right, #afa3a1, #10424e, #1f9a14, #0ea0c9); /* Gradiente entre dos tonos */
+}
+
+
+
 
 

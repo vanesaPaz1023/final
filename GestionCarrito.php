@@ -22,21 +22,25 @@ if ($productos!= null){
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tienda final</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href="css/estilos.css" rel="stylesheet">
-    </head>
-    <body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tienda final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css/estilos.css" rel="stylesheet">
+</head>
+
+<body>
     <header data-bs-theme="dark">
         <div class="navbar navbar-expand-lg navbar-dark bg-info">
             <div class="container">
-                <a href="index.php" class="navbar-brand">
+                <a href="HomeCliente.php" class="navbar-brand">
                     <strong>Trabajo final</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -50,18 +54,23 @@ if ($productos!= null){
                         </li> -->
                     </ul>
                     <li class="nav-item dropdown d-flex">
-                        <a class="nav-link dropdown-toggle text-center text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-center text-light" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $sessionActual->getUsuario()['correo'] ?>
                         </a>
-                        <ul class="dropdown-menu text-center bg-primary">
-                            <img src="img/Perfil.png"alt="">
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "Tipo: ". $sessionActual->getUsuario()['rol'] ?></a></li>
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "Cedula: ". $sessionActual->getUsuario()['cedula'] ?></a></li>
-                            <li><a class="dropdown-item text-center"  href="#"><?php echo "nombre: ". $sessionActual->getUsuario()['nombre'] ?></a></li>
-                            <li><a class="dropdown-item text-center" href="config/cerrarSesion.php">Cerrar Sesion</a></li>
+                        <ul class="dropdown-menu text-center bg-info">
+                            <img src="img/Perfil.png" alt="">
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "Tipo: ". $sessionActual->getUsuario()['rol'] ?></a></li>
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "Cedula: ". $sessionActual->getUsuario()['cedula'] ?></a></li>
+                            <li><a class="dropdown-item text-center"
+                                    href="#"><?php echo "nombre: ". $sessionActual->getUsuario()['nombre'] ?></a></li>
+                            <li><a class="dropdown-item text-center" href="config/cerrarSesion.php"><img
+                                        src="img/candado.png" alt="">Cerrar Sesion</a></li>
                         </ul>
                     </li>
-                  
+
                 </div>
             </div>
         </div>
@@ -99,23 +108,30 @@ if ($productos!= null){
                                 ?>
                                 <tr>
                                     <td><?php echo $nombre; ?></td>
-                                    <td><?php echo $sessionActual->getMoneda(). number_format($precio,2,'.',','); ?></td>
-                                    <td><input type="number" min="1" max= "<?php echo $unidad; ?>" value="<?php echo $cantidad; ?>" 
-                                        size="5" id="cant_<?php echo $_id; ?>" onchange="editarCantidadItem(this.value,<?php echo $_id; ?>)"> </td>
+                                    <td><?php echo $sessionActual->getMoneda(). number_format($precio,2,'.',','); ?>
+                                    </td>
+                                    <td><input type="number" min="1" max="<?php echo $unidad; ?>"
+                                            value="<?php echo $cantidad; ?>" size="5" id="cant_<?php echo $_id; ?>"
+                                            onchange="editarCantidadItem(this.value,<?php echo $_id; ?>)"> </td>
                                     <td>
-                                        <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo $sessionActual->getMoneda(). number_format($subtotal,2,'.',','); ?></div>
+                                        <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]">
+                                            <?php echo $sessionActual->getMoneda(). number_format($subtotal,2,'.',','); ?>
+                                        </div>
                                     </td>
                                     <td>
-                                        <a href="#" id="eliminar" class="btn btn-danger btn-sm" data-bs-id = "<?php echo $_id; ?>"
-                                        data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
+                                        <a href="#" id="eliminar" class="btn btn-danger btn-sm"
+                                            data-bs-id="<?php echo $_id; ?>" data-bs-toggle="modal"
+                                            data-bs-target="#eliminarModal">Eliminar</a>
                                     </td>
                                 </tr>
-                                    
+
                                 <?php } ?>
                                 <tr>
                                     <td colspan="3"></td>
                                     <td colspan="2">
-                                        <p class="h3" id="total"><?php echo $sessionActual->getMoneda() . number_format($total,2,'.',','); ?></p>
+                                        <p class="h3" id="total">
+                                            <?php echo $sessionActual->getMoneda() . number_format($total,2,'.',','); ?>
+                                        </p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -125,40 +141,45 @@ if ($productos!= null){
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3">
-                        <div class="alert alert-warning alert-dismissible fade show d-none"  id="mens" role="alert">
+                        <div class="alert alert-warning alert-dismissible fade show d-none" id="mens" role="alert">
                             <strong>Nota</strong>!</strong> !! Numero de cuenta es requerido!!.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <h3 class="text-center"> <strong>Proceso De Pago</strong></h3>
                         <div id="qrcode" class="d-flex justify-content-center">
                             <?php if($sessionActual->getProducto() !=null && count($sessionActual->getProducto()) > 0 ){ ?>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?data='<?php echo $sessionActual->getNumCart(); ?>'&amp;size=100x100" alt="" title="" />
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?data='<?php echo $sessionActual->getNumCart(); ?>'&amp;size=100x100"
+                                alt="" title="" />
                             <?php  } else {?>
-                                <img src="" alt=""  title="" />
-                            <?php  }  ?>  
+                            <img src="" alt="" title="" />
+                            <?php  }  ?>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Cedula</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1"  readonly  value="<?php echo $sessionActual->getUsuario()['cedula']; ?>">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" readonly
+                            value="<?php echo $sessionActual->getUsuario()['cedula']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" readonly  value="<?php echo $sessionActual->getUsuario()['nombre']; ?>">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" readonly
+                            value="<?php echo $sessionActual->getUsuario()['nombre']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">telefono</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" readonly  value="<?php echo $sessionActual->getUsuario()['telefono']; ?>">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" readonly
+                            value="<?php echo $sessionActual->getUsuario()['telefono']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="ncuenta" class="form-label">Numero de cuenta</label>
-                        <input type="email" class="form-control"placeholder="Ingrese Numero de cuenta" name="ncuenta" id="ncuenta">
+                        <input type="email" class="form-control" placeholder="Ingrese Numero de cuenta" name="ncuenta"
+                            id="ncuenta">
                     </div>
                     <div class="mb-3 text-center">
-                            <button class="btn btn-outline-info btn-lg" onclick="registrarPago()"> Realiza tu Pagar</button>
-                    </div>    
-                </div> 
+                        <button class="btn btn-outline-info btn-lg" onclick="registrarPago()"> Realiza tu Pagar</button>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -168,37 +189,42 @@ if ($productos!= null){
     <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="eliminarModalLabel">Eliminar</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Esta seguro de eliminar el producto?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button id="btn-eliminar" type="button" class="btn btn-danger" onclick="EliminarItem()">Eliminar</button>
-            </div>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="eliminarModalLabel">Eliminar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de eliminar el producto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btn-eliminar" type="button" class="btn btn-danger"
+                        onclick="EliminarItem()">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="myModal" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                El campo numero de cuenta es requerido
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cerrar</button>
-            </div>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    El campo numero de cuenta es requerido
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="closeModal()">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>                        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="js/Controlador.js"></script> 
+    <script src="js/Controlador.js"></script>
 </body>
+
 </html>
